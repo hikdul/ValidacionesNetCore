@@ -1,14 +1,14 @@
-# Validaciones
+# [![.Net](https://img.shields.io/badge/.Net-5B2B93?style=for-the-badge)](https://dotnet.microsoft.com/en-us/download) Validaciones
 en este corto ejemplo muestro como es el usar validaciones para el .Net.
 cada endPoint se explicara a detalle
 
 ---
-## Validaciones Por Defecto
+## :heavy_check_mark: Validaciones Por Defecto
 
 Estas son las que trae por defecto el Framework. No las use todas.. solo di un ejemplo de su uso.
 
 ---
-## Validaciones Personalizadas por atributo
+## :heavy_check_mark: Validaciones Personalizadas por atributo
 
 de seguro que por estas estas aqui pues con estas es que se generan las validaciones para casos especifico y nos muestra un orden.
 
@@ -37,7 +37,7 @@ System.ComponentModel.DataAnnotations
 
 ___
 
-## Validaciones Por Modelo (clase)
+##  :heavy_check_mark: Validaciones Por Modelo (clase)
 
 estas son validaciones especificas para un modelo. se usan para hacer una validacion de mas de 1 atributo detro de la misma clase. Para crear una validacion por modelo se debe:
 
@@ -55,3 +55,27 @@ public class clase:IValidableObject
 
 ```
 ya dentro de la clase se generan las validaciones de todo el modelo.
+
+___
+
+## :heavy_check_mark: Validaciones contra DB o desde el controlador
+
+de estas no coloco ejemplos pues son aquellos donde necesitamos usar un contexto o algun bloque de datos que generalmente se proveen desde una dependencia para generar la validacion. 
+ 
+ un ejemplo clasico es comprobar si el correo ya esta en uso en una tabla de usuarios
+
+ ```C#
+
+    [HttpPost]
+    public async Task<ActionResult> CrearUsuario(UserData userData)
+    {
+        try
+        {
+            if(context.usuarios.AnyAsync(u=>u.Email==userData.Email))
+                return BadRequest("El Correo Electronico Ya se encuentra registrado");
+        
+    ...
+    ...
+    ...
+
+ ```
